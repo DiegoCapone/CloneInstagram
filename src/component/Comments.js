@@ -1,30 +1,30 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet} from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 
 class Comments extends Component {
     render() {
         let view = null
-        if(this.props.comments) {
-            view = this.props.comments.map((item, index)=>{
+        if (this.props.comments) {
+            view = this.props.comments.map((item, index) => {
                 return (
                     <View style={styles.commentContainer} key={index}>
                         <Text style={styles.nickname}>{item.nickname}:</Text>
-                        <Text style={styles.comments}>{item.comments}</Text>
+                        <Text style={styles.comments}>{item.comment}</Text>
                     </View>
                 )
             })
         }
 
-        return(
-           <View style={styles.container}>
+        return (
+            <View style={styles.container}>
                 {view}
-           </View> 
+            </View>
         )
     }
 }
 
 const styles = StyleSheet.create({
-    container:{
+    container: {
         flex: 1,
         margin: 5,
     },

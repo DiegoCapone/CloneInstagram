@@ -2,45 +2,12 @@ import React, { Component } from 'react'
 import { StyleSheet, FlatList, View } from 'react-native'
 import Header from '../component/Header'
 import Post from '../component/Post'
+import { connect } from 'react-redux'
+import { fetchPosts } from '../Store/actions/posts'
 
-export default class Feed extends Component {
-    state = {
-        posts: [
-            {
-                id: Math.random(),
-                nickname: 'Rafael Pereira Filho',
-                email: 'rafael@gmail.com',
-                image: require('../../assets/imgs/fence.jpg'),
-                comments: [
-                    {
-                        nickname: 'john Ray Sheldon',
-                        comments: 'Stunning'
-                    },
-                    {
-                        nickname: 'Maria Silva',
-                        comments: 'Muito bom !'
-                    }
-                ]
-            },
-
-            {
-                id: Math.random(),
-                nickname: 'Rafael Pereira Filho',
-                email: 'rafael@gmail.com',
-                image: require('../../assets/imgs/fence.jpg'),
-                comments: [
-                    {
-                        nickname: 'john Ray Sheldon',
-                        comments: 'Stunning'
-                    },
-                    {
-                        nickname: 'Maria Silva',
-                        comments: 'Muito bom !'
-                    }
-                ]
-            }
-
-        ]
+class Feed extends Component {
+    componentDidMount = () => {
+        this.props.onFetchPosts()
     }
 
     render() {
@@ -48,7 +15,7 @@ export default class Feed extends Component {
             <View style={styles.container}>
                 <Header />
                 <FlatList
-                    data={this.state.posts}
+                    data={this.props.posts}
                     keyExtractor={item => `${item.id}`}
                     renderItem={({ item }) =>
                         <Post key={item.id} {...item} />} />
@@ -65,3 +32,18 @@ const styles = StyleSheet.create({
         backgroundColor: '#F5FCFF'
     }
 })
+
+const mapStateToProps = ({ posts }) => {
+    return {
+        posts: posts.posts
+    }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onFetchPosts: () => dispatch(fetchPosts())
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Feed)

@@ -8,8 +8,6 @@
 	<string>$(PRODUCT_NAME) would like to user your camera</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>$(PRODUCT_NAME) would like to save photo to your photo gallery</string>
-	
-	
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
